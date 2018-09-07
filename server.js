@@ -3,6 +3,10 @@ const bodyParser = require('body-parser')
 const jsonServer = require('json-server')
 const jwt = require('jsonwebtoken')
 
+// set the port of our application
+// process.env.PORT lets the port be set by Heroku
+var port = process.env.PORT || 8080;
+
 const server = jsonServer.create()
 const router = jsonServer.router('./db.json')
 const userdb = JSON.parse(fs.readFileSync('./users.json', 'UTF-8'))
@@ -65,6 +69,6 @@ server.use(/^(?!\/auth).*$/,  (req, res, next) => {
 })
 
 
-server.listen(3000, () => {
+server.listen(port, () => {
     console.log('Run Auth API Server')
 })
